@@ -1,15 +1,25 @@
-<?php namespace App\Http\Controllers;
-
+<?php 
+namespace App\Http\Controllers;
 use App\Models\Branch_master as Branch_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\BranchExport;
+
 class Branch_masterController extends Controller {
 
     public function index()
       { 
-        $data['branch_masters'] = Branch_master::all();
-        return view('branch_master/index',$data);
+        $data['branch_masters'] = Branch_master::paginate(5);        
+
+        // searching purpose
+        if (request()->has('name')) {          
+            $data['branch_masters']=Branch_master::where('name', '=', request()->input('name'))->paginate(5);
+        }
+         
+        return view('branch_master/index',$data);      
       }
     public function add()
       { 
@@ -20,9 +30,9 @@ class Branch_masterController extends Controller {
         $branch_master_data = array(
              'name' => Input::get('name'), 
             );
-    $branch_master_id = Branch_master::insert($branch_master_data);
+        $branch_master_id = Branch_master::insert($branch_master_data);
         return redirect('branch_master')->with('message', 'Branch_master successfully added');
-    }
+      }
     public function delete($id)
     {   
         $branch_master=Branch_master::find($id);
@@ -37,6 +47,7 @@ class Branch_masterController extends Controller {
     public function editPost()
     {   
         $id =Input::get('branch_master_id');
+        
         $branch_master=Branch_master::find($id);
                
         $branch_master_data = array(
@@ -44,9 +55,7 @@ class Branch_masterController extends Controller {
         );
         $branch_master_id = Branch_master::where('id', '=', $id)->update($branch_master_data);
         return redirect('branch_master')->with('message', 'Branch_master Updated successfully');
-    }
-
-    
+    }    
     public function changeStatus($id)
     {   
         $branch_master=Branch_master::find($id);
@@ -59,5 +68,15 @@ class Branch_masterController extends Controller {
         $data['branch_master']=Branch_master::find($id);
         return view('branch_master/view',$data);
         
+    }
+    //  Export to excel
+    public function exportExcel()
+    {
+      return Excel::download(new BranchExport, 'Branch.xlsx');
+    }  
+    //  Export to csv
+    public function exportCSV()
+    {
+      return Excel::download(new BranchExport, 'Branch.csv');
     }
 }

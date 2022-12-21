@@ -1,14 +1,22 @@
-<?php namespace App\Http\Controllers;
-
+<?php 
+namespace App\Http\Controllers;
 use App\Models\Requiredfor_master as Requiredfor_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\RequiredforExport;
+
 class Requiredfor_masterController extends Controller {
 
     public function index()
       { 
-        $data['requiredfor_masters'] = Requiredfor_master::all();
+        $data['requiredfor_masters'] = Requiredfor_master::paginate(5);
+         // searching purpose
+        if (request()->has('name')) {          
+            $data['requiredfor_masters']=Requiredfor_master::where('name', '=', request()->input('name'))->paginate(5);
+        }
         return view('requiredfor_master/index',$data);
       }
     public function add()
@@ -60,4 +68,15 @@ class Requiredfor_masterController extends Controller {
         return view('requiredfor_master/view',$data);
         
     }
+    //  Export to excel
+  public function exportExcel()
+  {
+    return Excel::download(new RequiredforExport, 'Requiredfor.xlsx');
+  }
+  
+  //  Export to csv
+  public function exportCSV()
+  {
+    return Excel::download(new RequiredforExport, 'Requiredfor.csv');
+  }
 }

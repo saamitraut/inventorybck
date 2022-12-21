@@ -1,14 +1,24 @@
-<?php namespace App\Http\Controllers;
-
+<?php 
+namespace App\Http\Controllers;
 use App\Models\Purpose_master as Purpose_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\PurposeExport;
+
 class Purpose_masterController extends Controller {
 
     public function index()
       { 
-        $data['purpose_masters'] = Purpose_master::all();
+        $data['purpose_masters'] = Purpose_master::list();
+
+        // searching purpose
+        if (request()->has('name')) {          
+            $data['purpose_masters']=Purpose_master::list(false,request()->input('name'));
+            // $data['purpose_masters']=Purpose_master::where('name', '=', request()->input('name'))->paginate(5);
+        }
         return view('purpose_master/index',$data);
       }
     public function add()
@@ -59,5 +69,15 @@ class Purpose_masterController extends Controller {
         $data['purpose_master']=Purpose_master::find($id);
         return view('purpose_master/view',$data);
         
+    }
+    //  Export to excel
+    public function exportExcel()
+    {
+      return Excel::download(new PurposeExport, 'Purpose.xlsx');
+    }  
+    //  Export to csv
+    public function exportCSV()
+    {
+      return Excel::download(new PurposeExport, 'Purpose.csv');
     }
 }

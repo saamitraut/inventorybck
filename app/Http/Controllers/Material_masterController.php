@@ -1,16 +1,27 @@
-<?php namespace App\Http\Controllers;
-
+<?php 
+namespace App\Http\Controllers;
 use App\Models\Unit_master as Unit_master;
 use App\Models\Material_master as Material_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MaterialExport;
+
 class Material_masterController extends Controller {
 
     public function index()
       { 
-        $data['material_masters'] = Material_master::all();
+        $data['material_masters'] = Material_master::list2();        
+        
+        // dd(Material_master::List2());
+        // searching purpose
+        if (request()->has('name')) {          
+            $data['material_masters']=Material_master::list2(false,request()->input('name'));
+            // $data['material_masters']=Material_master::where('name', '=', request()->input('name'))->paginate(5);
+        }
+
         $data['units'] = Unit_master::all()->toArray();
         return view('material_master/index',$data);
       }
@@ -50,9 +61,7 @@ class Material_masterController extends Controller {
         );
         $material_master_id = Material_master::where('id', '=', $id)->update($material_master_data);
         return redirect('material_master')->with('message', 'Material_master Updated successfully');
-    }
-
-    
+    }    
     public function changeStatus($id)
     {   
         $material_master=Material_master::find($id);
@@ -66,4 +75,15 @@ class Material_masterController extends Controller {
         return view('material_master/view',$data);
         
     }
+    //  Export to excel
+    public function exportExcel()
+    {
+      return Excel::download(new MaterialExport, 'Material.xlsx');
+    }  
+    //  Export to csv
+    public function exportCSV()
+    {
+      return Excel::download(new MaterialExport, 'Material.csv');
+    }
+
 }

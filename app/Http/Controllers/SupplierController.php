@@ -1,16 +1,29 @@
-<?php namespace App\Http\Controllers;
-
+<?php 
+namespace App\Http\Controllers;
 use App\Models\Supplier as Supplier;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Hash;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\SupplierExport;
 class SupplierController extends Controller {
 
     public function index()
       { 
-        $data['Suppliers'] = Supplier::all();
+        // $data['Suppliers'] = Supplier::all();
+        
+        $data['Suppliers'] = Supplier::list();
+
+        // searching purpose
+        $name=false; $number=false; $address=false;
+        if (request()->has('name')) {$name= request()->input('name');}
+        if (request()->has('number')) {$number= request()->input('number');}
+        if (request()->has('address')) {$address= request()->input('address');}
+        $data['Suppliers']=Supplier::list(false,$name,$number,$address);
         return view('Supplier/index',$data);
       }
+
     public function add()
       { 
         return view('Supplier/add');
@@ -63,5 +76,15 @@ class SupplierController extends Controller {
         $data['Supplier']=Supplier::find($id);
         return view('Supplier/view',$data);
         
+    }
+    //  Export to excel
+    public function exportExcel()
+    {
+      return Excel::download(new SupplierExport, 'Supplier.xlsx');
+    }  
+    //  Export to csv
+    public function exportCSV()
+    {
+      return Excel::download(new SupplierExport, 'Supplier.csv');
     }
 }

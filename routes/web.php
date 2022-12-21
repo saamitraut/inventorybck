@@ -21,6 +21,10 @@ Route::get('/view-unit_master/{id}', 'Unit_masterController@view');
 Route::group(array('prefix' => 'branch_master'), function()
 {
 Route::get('/', 'Branch_masterController@index');
+// Export to excel
+Route::get('/exportExcel','Branch_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Branch_masterController@exportCSV');
 Route::get('/add-branch_master', 'Branch_masterController@add');
 Route::post('/add-branch_master-post', 'Branch_masterController@addPost');
 Route::get('/delete-branch_master/{id}', 'Branch_masterController@delete');
@@ -28,6 +32,8 @@ Route::get('/edit-branch_master/{id}', 'Branch_masterController@edit');
 Route::post('/edit-branch_master-post', 'Branch_masterController@editPost');
 Route::get('/change-status-branch_master/{id}', 'Branch_masterController@changeStatus');
 Route::get('/view-branch_master/{id}', 'Branch_masterController@view');
+
+Route::post('/', 'Branch_masterController@index');
 });
 // end of branch_master routes
 // routes for requiredfor_master.
@@ -41,6 +47,11 @@ Route::get('/edit-requiredfor_master/{id}', 'Requiredfor_masterController@edit')
 Route::post('/edit-requiredfor_master-post', 'Requiredfor_masterController@editPost');
 Route::get('/change-status-requiredfor_master/{id}', 'Requiredfor_masterController@changeStatus');
 Route::get('/view-requiredfor_master/{id}', 'Requiredfor_masterController@view');
+Route::post('/', 'Requiredfor_masterController@index');
+// Export to excel
+Route::get('/exportExcel','Requiredfor_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Requiredfor_masterController@exportCSV');
 });
 // end of requiredfor_master routes
 // routes for material_master.
@@ -54,6 +65,11 @@ Route::get('/edit-material_master/{id}', 'Material_masterController@edit');
 Route::post('/edit-material_master-post', 'Material_masterController@editPost');
 Route::get('/change-status-material_master/{id}', 'Material_masterController@changeStatus');
 Route::get('/view-material_master/{id}', 'Material_masterController@view');
+Route::post('/', 'Material_masterController@index');
+// Export to excel
+Route::get('/exportExcel','Material_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Material_masterController@exportCSV');
 });
 // end of material_master routes
 // routes for purpose_master.
@@ -67,6 +83,11 @@ Route::get('/edit-purpose_master/{id}', 'Purpose_masterController@edit');
 Route::post('/edit-purpose_master-post', 'Purpose_masterController@editPost');
 Route::get('/change-status-purpose_master/{id}', 'Purpose_masterController@changeStatus');
 Route::get('/view-purpose_master/{id}', 'Purpose_masterController@view');
+Route::post('/', 'Purpose_masterController@index');
+// Export to excel
+Route::get('/exportExcel','Purpose_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Purpose_masterController@exportCSV');
 });
 
 // end of purpose_master routes
@@ -81,6 +102,10 @@ Route::get('/edit-inward_master/{id}', 'Inward_masterController@edit');
 Route::post('/edit-inward_master-post', 'Inward_masterController@editPost');
 Route::get('/change-status-inward_master/{id}', 'Inward_masterController@changeStatus');
 Route::get('/view-inward_master/{id}', 'Inward_masterController@view');
+Route::post('/', 'Inward_masterController@index');
+Route::get('/exportExcel','Inward_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Inward_masterController@exportCSV');
 });
 // end of inward_master routes
 // routes for received_master.
@@ -121,6 +146,11 @@ Route::get('/edit-outward_master/{id}', 'Outward_masterController@edit');
 Route::post('/edit-outward_master-post', 'Outward_masterController@editPost');
 Route::get('/change-status-outward_master/{id}', 'Outward_masterController@changeStatus');
 Route::get('/view-outward_master/{id}', 'Outward_masterController@view');
+Route::post('/', 'Outward_masterController@index');
+// Export to Excel
+Route::get('/exportExcel','Outward_masterController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','Outward_masterController@exportCSV');
 });
 
 // end of outward_master routes
@@ -163,6 +193,11 @@ Route::get('/edit-Supplier/{id}', 'SupplierController@edit');
 Route::post('/edit-Supplier-post', 'SupplierController@editPost');
 Route::get('/change-status-Supplier/{id}', 'SupplierController@changeStatus');
 Route::get('/view-Supplier/{id}', 'SupplierController@view');
+Route::post('/', 'SupplierController@index');
+// Export to excel
+Route::get('/exportExcel','SupplierController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','SupplierController@exportCSV');
 });
 // end of Supplier routes
 // routes for list.
@@ -178,3 +213,6 @@ Route::get('/change-status-list/{id}', 'ListController@changeStatus');
 Route::get('/view-list/{id}', 'ListController@view');
 });
 // end of list routes
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
