@@ -149,6 +149,13 @@
                 </li>
               </ul>
             </li>
+
+            <li class="menu-item">
+              <a href="\Stock" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Stock</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="\inward_master" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>

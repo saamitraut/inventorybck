@@ -211,8 +211,49 @@ Route::get('/edit-list/{id}', 'ListController@edit');
 Route::post('/edit-list-post', 'ListController@editPost');
 Route::get('/change-status-list/{id}', 'ListController@changeStatus');
 Route::get('/view-list/{id}', 'ListController@view');
+Route::get('/exportExcel','StockController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','StockController@exportCSV');
 });
 // end of list routes
+// routes for report.
+Route::group(array('prefix' => 'report'), function()
+{
+Route::get('/', 'ReportController@index');
+
+Route::get('/details/{id}', 'ReportController@details');
+    // Export to excel
+Route::get('/exportExcel','ReportController@exportExcel');
+
+// Export to csv
+Route::get('/exportCSV','ReportController@exportCSV');
+Route::get('/add-report', 'ReportController@add');
+Route::post('/add-report-post', 'ReportController@addPost');
+Route::get('/delete-report/{id}', 'ReportController@delete');
+Route::get('/edit-report/{id}', 'ReportController@edit');
+Route::post('/edit-report-post', 'ReportController@editPost');
+Route::get('/change-status-report/{id}', 'ReportController@changeStatus');
+Route::get('/view-report/{id}', 'ReportController@view');
+});
+// end of report routes
+// routes for Stock.
+Route::group(array('prefix' => 'Stock'), function()
+{
+Route::get('/', 'StockController@index');
+Route::get('/add-Stock', 'StockController@add');
+Route::post('/add-Stock-post', 'StockController@addPost');
+Route::get('/delete-Stock/{id}', 'StockController@delete');
+Route::get('/edit-Stock/{id}', 'StockController@edit');
+Route::post('/edit-Stock-post', 'StockController@editPost');
+Route::get('/change-status-Stock/{id}', 'StockController@changeStatus');
+Route::get('/view-Stock/{id}', 'StockController@view');
+   // Export to excel
+Route::get('/exportExcel','StockController@exportExcel');
+// Export to csv
+Route::get('/exportCSV','StockController@exportCSV');
+Route::post('/', 'StockController@index');
+});
+// end of Stock routes
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

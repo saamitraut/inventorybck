@@ -60,9 +60,10 @@ Search
           <form role="form" method="post" action="/outward_master/add-outward_master-post" >
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
         
-  <div class="mb-3">
+              <div id="OpeningStockalert" style="display:none" class="alert alert-danger" role="alert">Issued can not be more than Opening Stock!</div>
+              <div class="mb-3">
                 <label for="defaultSelect" class="form-label">Material_id:</label>
-                <select id="material_id" name="material_id" class="form-select">
+                <select onchange="showStock(this)" id="material_id" name="material_id" class="form-select">
                   <option>Select Material</option>                  
                   @foreach($materials as $material)
                     <option value="{{$material['id']}}">{{ $material['name'] }}</option>
@@ -78,15 +79,24 @@ Search
                   @endforeach
                 </select>
               </div>
-                
     <div class="form-group">
     <label for="material_description">Material_description:</label>
     <input type="text" class="form-control" id="material_description" name="material_description" required>
   </div>
-    <div class="form-group mb-3">
+    <div class="mb-3">
     <label for="opening_stock">Opening_stock:</label>
-    <input type="number" class="form-control" id="opening_stock" name="opening_stock" >
+    <input type="text" readonly class="form-control" id="opening_stock" name="opening_stock" >
   </div>
+  
+  <div class="mb-3">
+    <label for="issued">Issued:</label>
+    <input type="text" class="form-control" id="issued" name="issued" required>
+  </div>
+    <div class="mb-3">
+    <label for="closing_stock">Closing_stock:</label>
+    <input type="text" class="form-control" id="closing_stock" name="closing_stock" >
+  </div> 
+
   <div class="mb-3">
   <label for="opening_stock">required_for:</label>
     <select id="required_for" name="required_for" class="form-select">
@@ -134,14 +144,7 @@ Search
     <label for="receipt_no">receipt_no:</label>
     <input type="text"  class="form-control" id="receipt_no" name="receipt_no">
   </div>
-    <div class="form-group">
-    <label for="issued">Issued:</label>
-    <input type="number" class="form-control" id="issued" name="issued" required>
-  </div>
-    <div class="form-group">
-    <label for="closing_stock">Closing_stock:</label>
-    <input type="number" class="form-control" id="closing_stock" name="closing_stock" >
-  </div> 
+    
   <div class="mb-3">
                 <label for="issuedon" class="col-md-2 col-form-label">Issued On</label>
                 <div class="col-md-10"><input class="form-control" type="date" value="" id="issuedon" name="issuedon" required>
@@ -152,7 +155,7 @@ Search
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="submit" class="btn btn-primary">Save changes</button> </form>
+        <button type="submit" id="outwardsubmit" class="btn btn-primary">Save changes</button> </form>
       </div>
     </div>
   </div>
@@ -449,6 +452,6 @@ data-bs-target="#basicModall{{$i}}" class="dropdown-item" href="#"
                 </div>
  @endif
 </div>
-
+<script type="text/javascript" src="{{ URL::asset('js/outward.js') }}"></script>
 </div>
 @include('includes.footer')
