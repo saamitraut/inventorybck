@@ -59,14 +59,17 @@ class Outward_masterController extends Controller {
         $data['materials'] = Material_master::all();
         return view('outward_master/add');
       }
-    public function addPost()
+    
+      public function addPost()
       {
+        for($i=1;$i<=5;$i++){
+        if(Input::get('material_id'.$i)==0) continue;
         $outward_master_data = array(
-             'material_id' => Input::get('material_id'), 
-             'material_description' => Input::get('material_description'), 
-             'opening_stock' => Input::get('opening_stock'), 
-             'issued' => Input::get('issued'), 
-             'closing_stock' => Input::get('closing_stock'), 
+             'material_id' => Input::get('material_id'.$i), 
+             'material_description' => Input::get('material_description'.$i), 
+             'opening_stock' => Input::get('opening_stock'.$i), 
+             'issued' => Input::get('issued'.$i), 
+             'closing_stock' => Input::get('closing_stock'.$i), 
              'unit_id' => Input::get('unit_id'), 
              'created_at' => Carbon::now()->toDateTimeString(), 
              'unit_id' => Input::get('unit_id'),
@@ -80,8 +83,10 @@ class Outward_masterController extends Controller {
              'issued_to_staff' => Input::get('issued_to_staff'),
              'responsible_person' => Input::get('responsible_person'),
              'receipt_no' => Input::get('receipt_no'),          
-            );
-                        $outward_master_id = Outward_master::insert($outward_master_data);
+            );            
+            $outward_master_id = Outward_master::insert($outward_master_data);
+          }
+
         return redirect('outward_master')->with('message', 'Outward_master successfully added');
     }
     

@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+{{-- @extends('layouts.app') --}}
+@include('includes.header')
 @section('content')
 <div class="container">
     <div class="row">
@@ -21,3 +21,4 @@
     </div>
 </div>
 @endsection
+@include('includes.footer')

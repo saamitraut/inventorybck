@@ -58,19 +58,189 @@ Search
       
       <div class="modal-body">
           <form role="form" method="post" action="/outward_master/add-outward_master-post" >
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">        
+              
+              <div class="nav-align-top mb-4">
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-material1" aria-controls="navs-top-home" aria-selected="true">
+                          1
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-material2" aria-controls="navs-top-material2" aria-selected="false">
+                          2
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-material3" aria-controls="navs-top-messages" aria-selected="false">
+                          3
+                        </button>
+                      </li>
+
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-material4" aria-controls="navs-top-messages" aria-selected="false">
+                          4
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-material5" aria-controls="navs-top-messages" aria-selected="false">
+                          5
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-top-material1" role="tabpanel">                        
+                        <div class="mb-3">
+                          <label for="defaultSelect" class="form-label">Material_id:</label>
+                          <select onchange="showStock1(this)" id="material_id1" name="material_id1" class="form-select">
+                            <option value="0">Select Material</option>                  
+                            @foreach($materials as $material)
+                              <option value="{{$material['id']}}">{{ $material['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>              
+                        <div class="mb-3">
+                          <label for="material_description">Material_description:</label>
+                          <input type="text" class="form-control" id="material_description1" value="some description" name="material_description1" required>
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="opening_stock">Opening_stock:</label>
+                          <input type="text" readonly class="form-control" id="opening_stock1" name="opening_stock1" >
+                        </div>  
+                        <div class="mb-3">
+                          <label for="issued">Issued:</label>
+                          <input type="text" class="form-control" id="issued1" name="issued1" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="closing_stock">Closing_stock:</label>
+                          <input type="text" class="form-control" id="closing_stock1" name="closing_stock1" >
+                        </div> 
+                      </div>{{-- navs-top-material1 ends here --}}
+                      <div class="tab-pane fade" id="navs-top-material2" role="tabpanel">
+                        <div class="mb-3">
+                          <label for="defaultSelect" class="form-label">Material_id:</label>
+                          <select onchange="showStock2(this)" id="material_id2" name="material_id2" class="form-select">
+                            <option value="0">Select Material</option>                  
+                            @foreach($materials as $material)
+                              <option value="{{$material['id']}}">{{ $material['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>              
+                        <div class="mb-3">
+                          <label for="material_description">Material_description:</label>
+                          <input type="text" class="form-control" id="material_description2" value="some description" name="material_description2" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="opening_stock">Opening_stock:</label>
+                          <input type="text" readonly class="form-control" id="opening_stock2" name="opening_stock2" >
+                        </div>  
+                        <div class="mb-3">
+                          <label for="issued">Issued:</label>
+                          <input type="text" class="form-control" id="issued2" name="issued2" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="closing_stock">Closing_stock:</label>
+                          <input type="text" class="form-control" id="closing_stock2" name="closing_stock2" >
+                        </div> 
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-material3" role="tabpanel">
+                        <div class="mb-3">
+                          <label for="defaultSelect" class="form-label">Material_id:</label>
+                          <select onchange="showStock3(this)" id="material_id3" name="material_id3" class="form-select">
+                            <option value="0">Select Material</option>                  
+                            @foreach($materials as $material)
+                              <option value="{{$material['id']}}">{{ $material['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>              
+                        <div class="mb-3">
+                          <label for="material_description">Material_description:</label>
+                          <input type="text" class="form-control" id="material_description3" value="some description" name="material_description3" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="opening_stock">Opening_stock:</label>
+                          <input type="text" readonly class="form-control" id="opening_stock3" name="opening_stock3" >
+                        </div>  
+                        <div class="mb-3">
+                          <label for="issued">Issued:</label>
+                          <input type="text" class="form-control" id="issued3" name="issued3">
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="closing_stock">Closing_stock:</label>
+                          <input type="text" class="form-control" id="closing_stock3" name="closing_stock3" >
+                        </div> 
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-material4" role="tabpanel">
+                        <div class="mb-3">
+                          <label for="defaultSelect" class="form-label">Material_id:</label>
+                          <select onchange="showStock4(this)" id="material_id4" name="material_id4" class="form-select">
+                            <option value="0">Select Material</option>                  
+                            @foreach($materials as $material)
+                              <option value="{{$material['id']}}">{{ $material['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>              
+                        <div class="mb-3">
+                          <label for="material_description">Material_description:</label>
+                          <input type="text" class="form-control" id="material_description4" value="some description" name="material_description4">
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="opening_stock">Opening_stock:</label>
+                          <input type="text" readonly class="form-control" id="opening_stock4" name="opening_stock4" >
+                        </div>  
+                        <div class="mb-3">
+                          <label for="issued">Issued:</label>
+                          <input type="text" class="form-control" id="issued4" name="issued4" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="closing_stock">Closing_stock:</label>
+                          <input type="text" class="form-control" id="closing_stock4" name="closing_stock4" >
+                        </div> 
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-material5" role="tabpanel">
+                        <div class="mb-3">
+                          <label for="defaultSelect" class="form-label">Material_id:</label>
+                          <select onchange="showStock5(this)" id="material_id5" name="material_id5" class="form-select">
+                            <option value="0">Select Material</option>                  
+                            @foreach($materials as $material)
+                              <option value="{{$material['id']}}">{{ $material['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>              
+                        <div class="mb-3">
+                          <label for="material_description">Material_description:</label>
+                          <input type="text" class="form-control" id="material_description5" value="some description" name="material_description5" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="opening_stock">Opening_stock:</label>
+                          <input type="text" readonly class="form-control" id="opening_stock5" name="opening_stock5" >
+                        </div>  
+                        <div class="mb-3">
+                          <label for="issued">Issued:</label>
+                          <input type="text" class="form-control" id="issued5" name="issued5" >
+                        </div>
+    
+                        <div class="mb-3">
+                          <label for="closing_stock">Closing_stock:</label>
+                          <input type="text" class="form-control" id="closing_stock5" name="closing_stock5" >
+                        </div> 
+                      </div>
+                    </div>
+                  </div>
               <div id="OpeningStockalert" style="display:none" class="alert alert-danger" role="alert">Issued can not be more than Opening Stock!</div>
-              <div class="mb-3">
-                <label for="defaultSelect" class="form-label">Material_id:</label>
-                <select onchange="showStock(this)" id="material_id" name="material_id" class="form-select">
-                  <option>Select Material</option>                  
-                  @foreach($materials as $material)
-                    <option value="{{$material['id']}}">{{ $material['name'] }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="mb-3">
+              
+
+  <div class="mb-3">
                 <label for="defaultSelect" class="form-label">Branch</label>
                 <select id="branch_id" name="branch_id" class="form-select">
                   <option>Select Branch</option>                  
@@ -79,24 +249,6 @@ Search
                   @endforeach
                 </select>
               </div>
-    <div class="form-group">
-    <label for="material_description">Material_description:</label>
-    <input type="text" class="form-control" id="material_description" name="material_description" required>
-  </div>
-    <div class="mb-3">
-    <label for="opening_stock">Opening_stock:</label>
-    <input type="text" readonly class="form-control" id="opening_stock" name="opening_stock" >
-  </div>
-  
-  <div class="mb-3">
-    <label for="issued">Issued:</label>
-    <input type="text" class="form-control" id="issued" name="issued" required>
-  </div>
-    <div class="mb-3">
-    <label for="closing_stock">Closing_stock:</label>
-    <input type="text" class="form-control" id="closing_stock" name="closing_stock" >
-  </div> 
-
   <div class="mb-3">
   <label for="opening_stock">required_for:</label>
     <select id="required_for" name="required_for" class="form-select">
@@ -140,10 +292,7 @@ Search
     <label for="responsible_person">responsible_person:</label>
     <input type="text"  class="form-control" id="responsible_person" name="responsible_person">
   </div>
-  <div class="mb-3">
-    <label for="receipt_no">receipt_no:</label>
-    <input type="text"  class="form-control" id="receipt_no" name="receipt_no">
-  </div>
+  
     
   <div class="mb-3">
                 <label for="issuedon" class="col-md-2 col-form-label">Issued On</label>
@@ -183,7 +332,7 @@ Search
   <div class="mb-3">
                 <label for="defaultSelect" class="form-label">Material_id:</label>
                 <select id="material_id" name="material_id" class="form-select">
-                  <option>Select Material</option>                  
+                  <option value="0">Select Material</option>                  
                   @foreach($materials as $material)
                     <option value="{{$material['id']}}">{{ $material['name'] }}</option>
                   @endforeach
@@ -352,7 +501,7 @@ data-bs-target="#basicModall{{$i}}" class="dropdown-item" href="#"
  <div class="mb-3">
   <label for="defaultSelect" class="form-label">Material</label>
   <select id="material_id" name="material_id" class="form-select">
-    <option>Select Material</option>                  
+    <option value="0">Select Material</option>                  
     @foreach($materials as $material)
       <option {{$outward_master->material_id==$material['id']?'selected':''}} value="{{$material['id']}}">{{ $material['name'] }}</option>
     @endforeach
@@ -369,7 +518,7 @@ data-bs-target="#basicModall{{$i}}" class="dropdown-item" href="#"
     
     <div class="mb-3">
     <label for="material_description">Material_description:</label>
-    <input type="text" value="<?php echo $outward_master->material_description ?>" class="form-control" id="material_description" name="material_description">
+    <input type="text" value="<?php echo $outward_master->material_description ?>" class="form-control" id="material_description" value="some description" name="material_description">
   </div>
     <div class="mb-3">
     <label for="opening_stock">Opening_stock:</label>
