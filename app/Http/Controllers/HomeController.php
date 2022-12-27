@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Report as Report;
 use Illuminate\Http\Request;
+use App\Exports\StockExport;
+
 
 class HomeController extends Controller
 {
@@ -16,13 +18,9 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
+        $data['reports'] = Report::List();
+        return view('home',$data);
     }
 }

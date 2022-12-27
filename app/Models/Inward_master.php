@@ -15,7 +15,7 @@ class Inward_master extends Eloquent  {
         if($export){
             $return=$return->select('material_master.name as material','material_description','supplier.name as supplier','received','return','inward_master.rate','amount','receivedon');
         }else{
-            $return=$return->select('inward_master.id','inward_master.material_id','inward_master.material_description','inward_master.received','inward_master.return','inward_master.rate','inward_master.amount','inward_master.receivedon','inward_master.status','inward_master.image','inward_master.receiptno','material_master.name as material','supplier.name as supplier');
+            $return=$return->select('inward_master.id','inward_master.material_id','inward_master.material_description','inward_master.opening_stock','inward_master.received','inward_master.closing_stock','inward_master.return','inward_master.rate','inward_master.amount','inward_master.receivedon','inward_master.status','inward_master.image','inward_master.receiptno','material_master.name as material','supplier.name as supplier');
         }        
         
         if($material_id){

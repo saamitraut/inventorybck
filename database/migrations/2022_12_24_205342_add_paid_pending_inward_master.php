@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageInwardMaster extends Migration
+class AddPaidPendingInwardMaster extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddImageInwardMaster extends Migration
      */
     public function up()
     {
-       Schema::table("inward_master", function (Blueprint $table) {
+        Schema::table("inward_master", function (Blueprint $table) {
 
-            $table->string('image');
+            $table->string('paid')->nullable();
+            $table->string('pending')->nullable();
         });
     }
 

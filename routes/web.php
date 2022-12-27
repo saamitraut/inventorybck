@@ -255,5 +255,4 @@ Route::post('/', 'StockController@index');
 });
 // end of Stock routes
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');

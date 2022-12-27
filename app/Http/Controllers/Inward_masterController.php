@@ -6,10 +6,10 @@ use App\Models\Inward_master as Inward_master;
 use App\Models\Unit_master as Unit_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Hash;
+use Hash;use Response;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InwardExport;
-
+use Illuminate\Http\Request;
 
 class Inward_masterController extends Controller {
 
@@ -24,11 +24,9 @@ class Inward_masterController extends Controller {
         if (request()->has('supplier') and (request()->input('supplier') != "Select Supplier")) {
           $supplier= request()->input('supplier');
         }
-        
         if (request()->has('receivedon') and ! is_null(request()->input('receivedon'))) {          
           $receivedon= request()->input('receivedon');
         }
-        
         if (request()->has('receiptno') and ! is_null(request()->input('receiptno'))) {          
           $receiptno= request()->input('receiptno');
         }
@@ -39,28 +37,31 @@ class Inward_masterController extends Controller {
         $data['materials'] = Material_master::all()->toArray();        
         
         return view('inward_master/index',$data);
-      }
-      
-    
+      }    
     public function add()
       { 
         $data['materials'] = Material_master::all();
+        
         return view('inward_master/add',$data);
       }
-    public function addPost()
+    public function addPost(Request $request)
       {
-        $inward_master_data = array(
-             'material_id' => Input::get('material_id'), 
-             'material_description' => Input::get('material_description'), 
-             'supplier' => Input::get('supplier'), 
-             'received' => Input::get('received'), 
-             'return' => Input::get('return'), 
-             'rate' => Input::get('rate'),
-             'receivedon' => Input::get('receivedon'),             
-             'amount' => Input::get('rate')*Input::get('received'), 
-             'image' => '', 
-             'receiptno' => Input::get('receiptno'),
-            );
+        $inward_master_data = $request->validate([
+          'material_id' => 'required',
+          'material_description' => 'required',
+          'supplier' => 'required',
+          'received' => 'required',
+          'return' => 'present',
+          'rate' => 'present',
+          'receivedon' => 'required',
+          'amount' => 'present',
+          // 'image' => 'present',
+          'receiptno' => 'required|unique:inward_master,receiptno',
+          'opening_stock' => 'required',
+          'closing_stock' => 'required',
+          'reorder' => 'present',
+      ]);
+        
         if (Input::hasFile('image')) {
             $destinationPath = 'uploads'; 
             $image = Input::file('image');
@@ -70,8 +71,9 @@ class Inward_masterController extends Controller {
         }
         // dd($inward_master_data);
         $inward_master_id = Inward_master::insert($inward_master_data);
-        
-        return redirect('inward_master')->with('message', 'Inward_master successfully added');
+        session(['message' => 'Inward_master successfully added']);
+        return Response::json(['message'=>'Inward_master successfully added']);
+        // return redirect('inward_master')->with('message', 'Inward_master successfully added');
     }
     public function delete($id)
     {   

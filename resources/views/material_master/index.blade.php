@@ -129,7 +129,7 @@ Search
 @foreach($material_masters as $material_master)
 <div class="card mb-4">
                     <div class="card-body">
-                      <h5 class="card-title">{{$material_master->material}}</h5>
+                      {{($material_masters->currentPage()-1)*$material_masters->perPage()+$i}}<h5 class="card-title">{{$material_master->material}}</h5>
                       <div class="card-subtitle text-muted mb-3">{{$material_master->unit}}</div>
                       <a class="card-link" href="{{Request::root()}}/material_master/change-status-material_master/{{$material_master->id }}"
                 ><i class="bx bx-windows me-1"></i> @if($material_master->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a>

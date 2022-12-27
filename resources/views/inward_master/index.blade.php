@@ -1,5 +1,11 @@
 @include('includes.header')
-
+<style>
+  .required:after {
+      content: "*";
+      font-weight: bold;
+      color: red;
+  }
+</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content starts -->
@@ -56,58 +62,96 @@ Search
         ></button>
       </div>
       <div class="modal-body">
-          <form role="form" method="post" action="/inward_master/add-inward_master-post" enctype="multipart/form-data">
+        {{-- @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif --}}
+        <div id="errorsOuterDiv" class="alert alert-danger d-none"><ul id="errors"></ul></div>
+          <form role="form" method="post" id="add_inward_master" action="/inward_master/add-inward_master-post" enctype="multipart/form-data" onsubmit="saveRegister(event)">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="mb-3">
+              <div class="row"><div class="col-sm-6 mb-3">
                 <label for="defaultSelect" class="form-label">Material</label>
-                <select id="material_id" name="material_id" class="form-select">
+                <select onchange="showStock(this)" id="material_id" name="material_id" class="form-select" required>
                   <option>Select Material</option>                  
                   @foreach($materials as $material)
                     <option value="{{$material['id']}}">{{ $material['name'] }}</option>
                   @endforeach
                 </select>
               </div>
-              <div class="mb-3">
-                 <label for="receiptno">ReceiptNo:</label>
-                 <input type="text" value="" class="form-control" id="receiptno" name="receiptno">
-              </div>
-                <div class="form-group">
-                <label for="material_description">Material Description:</label>
-                <input type="text" class="form-control" id="material_description" name="material_description">
-              </div>
-              <div class="mb-3">
-                <label for="defaultSelect" class="form-label">supplier</label>
-                <select id="defaultSelect" name="supplier" class="form-select">
+              <div class="col-sm-6 mb-3">
+                <label for="defaultSelect" class="form-label">supplier </label>
+                <select id="defaultSelect" name="supplier" class="form-select" required>
                   <option>Select supplier</option>                  
                   @foreach($suppliers as $supplier)
                     <option value="{{$supplier['id']}}">{{ $supplier['name'] }}</option>
                   @endforeach
                 </select>
               </div>
-                <div class="form-group">
-                <label for="received">Received:</label>
-                <input type="number" class="form-control" id="received" name="received">
               </div>
-                <div class="form-group">
-                <label for="return">Return:</label>
-                <input type="text" class="form-control" id="return" name="return">
+                <div class="row"><div class="col-sm-6 mb-3">
+                <label for="material_description">Material Description:</label>
+                <input type="text" class="form-control" id="material_description" name="material_description" required>
+              </div><div class="col-sm-6 mb-3">
+                <label for="receiptno">ReceiptNo:</label>
+                <input type="text" value="" class="form-control" id="receiptno" name="receiptno" >
+             </div>
               </div>
-                {{-- <div class="form-group">
-                <label for="unit">Unit:</label>
-                <input type="text" class="form-control" id="unit" name="unit">
-              </div> --}}
-                <div class="form-group">
+              <div class="row"><div class="col-sm-6 mb-3">
+                <label for="opening_stock">Opening_stock:</label>
+                {{--  --}}
+                <input type="text" class="form-control" id="opening_stock" name="opening_stock" readonly>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <label for="closing_stock">Closing_stock:</label>
+                <input type="text" class="form-control" id="closing_stock" name="closing_stock" readonly>
+              </div></div>
+                <div class="row"><div class="col-sm-4 mb-3">
+                  <label for="received">Received:</label>
+                  <input type="text" class="form-control" id="received" name="received" >
+                </div>
+                <div class="col-sm-4 mb-3">
+                  <label for="return">Return:</label>
+                  <input type="text" class="form-control" id="return" name="return">
+                </div>
+                <div class="col-sm-4 mb-3">
+                  <label for="return">Reorder:</label>
+                  <input type="text" class="form-control" id="reorder" name="reorder">
+                </div>
+            </div>
+              <div class="row"><div class="col-sm-6 mb-3">
                 <label for="rate">Rate:</label>
                 <input type="text" class="form-control" id="rate" name="rate">
               </div>
-              <div class="mb-3">
-                <label for="receivedon" class="col-md-2 col-form-label">receivedon</label>
-                <div class="col-md-10"><input class="form-control" type="date" value="" id="receivedon" name="receivedon">
+              <div class="col-sm-6 mb-3">
+                <label for="amount">Amount:</label>
+                <input type="text" value="" class="form-control" id="amount" name="amount">
+              </div>
+              </div>
+              <div class="row">                
+                <div class="col-sm-6 mb-3">
+                  <label for="amount">Paid:</label>
+                  <input type="text" value="" class="form-control" id="paid" name="paid">
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="amount">Pending:</label>
+                  <input type="text" value="" class="form-control" id="pending" name="pending">
                 </div>
               </div>
-              <div class="mb-3">
-    <label for="image" class="col-md-2 col-form-label">Image:</label>
-    <div class="col-md-10"><input type="file" class="btn btn-primary" id="image" name="image"></div></div>
+              <div class="row">
+                <div class="col-sm-6 mb-3">
+                  <label for="image" class="col-md-2 col-form-label">Image:</label>
+                  <div class="col-md-10"><input type="file" class="btn btn-primary" id="image" name="image"></div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="receivedon" class="col-md-2 col-form-label required">receivedon</label>
+                  <div class="col-md-10"><input class="form-control" type="date" value="" id="receivedon" name="receivedon" required>
+                  </div>
+                </div></div>
               
       </div>
       <div class="modal-footer">
@@ -199,13 +243,14 @@ Search
                     <div class="card-body">
                       <h5 class="card-title">{{$inward_master->material}}</h5>
                       <div class="card-subtitle text-muted mb-3">ReceiptNo: {{$inward_master->receiptno}}</div>
-                      <p class="card-text">Supplier: {{$inward_master->supplier}}</p>
-                      <p class="card-text">
-                        {{$inward_master->material_description}}
+                      <p class="card-text">Supplier: {{$inward_master->supplier}}  
+                        Description: {{$inward_master->material_description}}
                       </p>
                       <p class="card-text">
-                        Received : {{$inward_master->received}} On : {{\Carbon\Carbon::parse($inward_master->receivedon)->format('d/m/Y')}}                      </p>
+                        Received : {{$inward_master->received}} Return : {{$inward_master->return}} On : {{\Carbon\Carbon::parse($inward_master->receivedon)->format('d/m/Y')}} </p>
                        <p class="card-text">
+                        Opening Stock : {{$inward_master->opening_stock}}  Closing Stock : {{$inward_master->closing_stock}} </p>
+                        <p class="card-text">
                         Rate: {{$inward_master->rate}} Amount: {{$inward_master->amount}}
                       </p>
                       <a class="card-link" href="{{Request::root()}}/inward_master/change-status-inward_master/{{$inward_master->id }}"
@@ -359,4 +404,6 @@ data-bs-target="#basicInvoice{{$i}}" class="card-img card-img-right" src="/uploa
   {{ $inward_masters->render() }} 
 </div>
 </div>
+
+<script type="text/javascript" src="{{ URL::asset('js/inward.js') }}"></script>
 @include('includes.footer')
