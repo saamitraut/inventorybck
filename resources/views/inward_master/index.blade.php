@@ -15,9 +15,9 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Inward Entries</h4>
 
   
-@if(Session::has('message'))
+@if(Session::has('message2'))
   <div class="alert alert-success">
-                    <strong><span class="glyphicon glyphicon-ok"></span>{{  Session::get('message') }}</strong>
+                    <strong><span class="glyphicon glyphicon-ok"></span>{{  Session::get('message2') }}</strong>
                 </div>
 @endif
 
@@ -249,7 +249,7 @@ Search
                       <p class="card-text">
                         Received : {{$inward_master->received}} Return : {{$inward_master->return}} On : {{\Carbon\Carbon::parse($inward_master->receivedon)->format('d/m/Y')}} </p>
                        <p class="card-text">
-                        Opening Stock : {{$inward_master->opening_stock}}  Closing Stock : {{$inward_master->closing_stock}} </p>
+                        Opening Stock : {{$inward_master->opening_stock}}  Closing Stock : {{$inward_master->closing_stock}} Reorder : {{$inward_master->reorder}} </p>
                         <p class="card-text">
                         Rate: {{$inward_master->rate}} Amount: {{$inward_master->amount}}
                       </p>

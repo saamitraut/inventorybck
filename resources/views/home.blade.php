@@ -5,7 +5,8 @@
     <div class="container-xxl flex-grow-1 container-p-y">
       <div class="row">
         <div class="col-lg-6 mb-4 order-0">
-          <div class="card">
+          
+          <div class="card">            
             <div class="d-flex align-items-end row">
               <div class="col-sm-6">
                 <div class="card-body">
@@ -41,6 +42,42 @@
                 </div>
  @endif
 </div></div></div>
+</div></div>
+<div class="col-lg-6 mb-4 order-0">
+          
+          <div class="card">            
+            <div class="d-flex align-items-end row">
+              <div class="col-sm-6">
+                <div class="card-body">
+                  <!-- Export start -->
+<a class="btn btn-primary" style="margin-bottom: 15px" href="/report/exportExcel" role="button">Export</a>
+<!-- Export end -->
+@if(count($reports)>0)
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Material</th>
+         <th>Reorder</th>        
+      </tr>
+    </thead>
+    <tbody>
+    <?php $i=1 ?>
+@foreach($reorders as $reorder)
+      <tr>
+        <td> {{$reorder->material }} </td>
+        <td> {{$reorder->reorder }} </td>        
+      </tr>
+    <?php $i++;  ?>
+    @endforeach
+    </tbody>
+  </table>
+   @else
+  <div class="alert alert-info" role="alert">
+                    <strong>No Reports Found!</strong>
+                </div>
+ @endif
 </div></div></div>
+</div></div>
+</div>
 </div></div>
 @include('includes.footer')

@@ -8,7 +8,7 @@ class ReportExport implements FromCollection,WithHeadings
 {
   public function collection()
   {
-    return Report::get();
+    return Report::List();
   }
   public function headings() : array
     {

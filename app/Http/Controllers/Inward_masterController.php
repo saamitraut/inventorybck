@@ -72,7 +72,7 @@ class Inward_masterController extends Controller {
         // dd($inward_master_data);
         $inward_master_id = Inward_master::insert($inward_master_data);
         session(['message' => 'Inward_master successfully added']);
-        return Response::json(['message'=>'Inward_master successfully added']);
+        return Response::json(['message2'=>'Inward_master successfully added']);
         // return redirect('inward_master')->with('message', 'Inward_master successfully added');
     }
     public function delete($id)
