@@ -90,10 +90,11 @@ class ReportController extends Controller {
   public function details($id)
     {   
         $report=Report::where('material_id', '=', $id)->first();
+        $material_details=Material_master::find($id);
         if(is_null($report)){
-          return array('material_id'=>$id,'credit'=>0,'debit'=>0,'availableStock'=>0);
+          return ['stockdetails'=>array('material_id'=>$id,'credit'=>0,'debit'=>0,'availableStock'=>0)];
         }else{
-          return $report->toArray();
+          return ['stockdetails'=>$report->toArray(),'material_details'=>$material_details->toArray()];
         }
         
         // return redirect('report')->with('message', 'Report deleted successfully.');

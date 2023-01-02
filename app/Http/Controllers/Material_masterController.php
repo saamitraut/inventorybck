@@ -34,7 +34,7 @@ class Material_masterController extends Controller {
       {
         $material_master_data = array(
              'name' => Input::get('name'), 
-             'rate' => Input::get('rate'), 
+             'GST' => Input::get('GST'), 
             );
         $material_master_id = Material_master::insert($material_master_data);
         return redirect('material_master')->with('message', 'Material_master successfully added');
@@ -57,7 +57,7 @@ class Material_masterController extends Controller {
                        
         $material_master_data = array(
           'name' => Input::get('name'), 
-          'rate' => Input::get('rate'), 
+          'GST' => Input::get('GST'), 
         );
         $material_master_id = Material_master::where('id', '=', $id)->update($material_master_data);
         return redirect('material_master')->with('message', 'Material_master Updated successfully');

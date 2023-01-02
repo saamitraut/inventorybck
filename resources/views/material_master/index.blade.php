@@ -61,8 +61,8 @@ Search
               <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-group">
-              <label for="rate">Rate:</label>
-              <input type="text" class="form-control" id="rate" name="rate">
+              <label for="GST">GST:</label>
+              <input type="text" class="form-control" id="GST" name="GST">
             </div>
       </div>
       <div class="modal-footer">
@@ -130,7 +130,7 @@ Search
 <div class="card mb-4">
                     <div class="card-body">
                       {{($material_masters->currentPage()-1)*$material_masters->perPage()+$i}}<h5 class="card-title">{{$material_master->material}}</h5>
-                      <div class="card-subtitle text-muted mb-3">{{$material_master->unit}}</div>
+                      <div class="card-subtitle text-muted mb-3">Unit: {{$material_master->unit}} GST: {{$material_master->GST}}</div>
                       <a class="card-link" href="{{Request::root()}}/material_master/change-status-material_master/{{$material_master->id }}"
                 ><i class="bx bx-windows me-1"></i> @if($material_master->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a>
                        <a data-bs-toggle="modal"data-bs-target="#basicModall{{$i}}" class="card-link" href="#">Edit</a>
@@ -161,8 +161,8 @@ Search
     <input type="text" value="<?php echo $material_master->material ?>" class="form-control" id="name" name="name">
   </div>
     <div class="mb-3">
-    <label for="rate">Rate:</label>
-    <input type="text" value="<?php echo $material_master->rate ?>" class="form-control" id="rate" name="rate">
+    <label for="GST">GST:</label>
+    <input type="text" value="<?php echo $material_master->GST ?>" class="form-control" id="GST" name="GST">
   </div>
               
       </div>

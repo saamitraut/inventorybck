@@ -220,7 +220,6 @@ Route::get('/exportCSV','StockController@exportCSV');
 Route::group(array('prefix' => 'report'), function()
 {
 Route::get('/', 'ReportController@index');
-
 Route::get('/details/{id}', 'ReportController@details');
     // Export to excel
 Route::get('/exportExcel','ReportController@exportExcel');

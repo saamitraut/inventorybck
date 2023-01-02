@@ -101,12 +101,15 @@ Search
                 <input type="text" value="" class="form-control" id="receiptno" name="receiptno" >
              </div>
               </div>
-              <div class="row"><div class="col-sm-6 mb-3">
+              <div class="row"><div class="col-sm-4 mb-3">
                 <label for="opening_stock">Opening_stock:</label>
-                {{--  --}}
                 <input type="text" class="form-control" id="opening_stock" name="opening_stock" readonly>
               </div>
-              <div class="col-sm-6 mb-3">
+              <div class="col-sm-4 mb-3">
+                <label for="GST">GST:</label>
+                <input type="text" class="form-control" id="GST" name="GST" readonly>
+              </div>
+              <div class="col-sm-4 mb-3">
                 <label for="closing_stock">Closing_stock:</label>
                 <input type="text" class="form-control" id="closing_stock" name="closing_stock" readonly>
               </div></div>
@@ -123,11 +126,14 @@ Search
                   <input type="text" class="form-control" id="reorder" name="reorder">
                 </div>
             </div>
-              <div class="row"><div class="col-sm-6 mb-3">
+              <div class="row"><div class="col-sm-4 mb-3">
                 <label for="rate">Rate:</label>
                 <input type="text" class="form-control" id="rate" name="rate">
+              </div><div class="col-sm-4 mb-3">
+                <label for="transportation">Transportation:</label>
+                <input type="text" class="form-control" id="transportation" name="transportation">
               </div>
-              <div class="col-sm-6 mb-3">
+              <div class="col-sm-4 mb-3">
                 <label for="amount">Amount:</label>
                 <input type="text" value="" class="form-control" id="amount" name="amount">
               </div>
@@ -251,7 +257,7 @@ Search
                        <p class="card-text">
                         Opening Stock : {{$inward_master->opening_stock}}  Closing Stock : {{$inward_master->closing_stock}} Reorder : {{$inward_master->reorder}} </p>
                         <p class="card-text">
-                        Rate: {{$inward_master->rate}} Amount: {{$inward_master->amount}}
+                        Rate: {{$inward_master->rate}} Transportation: {{$inward_master->transportation}} Amount: {{$inward_master->amount}}
                       </p>
                       <a class="card-link" href="{{Request::root()}}/inward_master/change-status-inward_master/{{$inward_master->id }}"
                 ><i class="bx bx-windows me-1"></i> @if($inward_master->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a>

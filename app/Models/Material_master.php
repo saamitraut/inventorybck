@@ -27,7 +27,7 @@ class Material_master extends Eloquent  {
         if($export){
             $return=$return->select('material_master.name AS material','unit_master.name AS unit')->get();
         }else{
-            $return=$return->select('material_master.name AS material','unit_master.name AS unit','material_master.id','material_master.status','material_master.rate')->paginate(5);
+            $return=$return->select('material_master.name AS material','unit_master.name AS unit','material_master.id','material_master.status','material_master.GST')->paginate(5);
         }
         return $return;  
     

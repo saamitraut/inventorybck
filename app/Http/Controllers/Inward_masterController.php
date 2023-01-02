@@ -60,7 +60,8 @@ class Inward_masterController extends Controller {
           'opening_stock' => 'required',
           'closing_stock' => 'required',
           'reorder' => 'present',
-      ]);
+          'transportation' => 'required',
+        ]);
         
         if (Input::hasFile('image')) {
             $destinationPath = 'uploads'; 
