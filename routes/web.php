@@ -103,9 +103,11 @@ Route::post('/edit-inward_master-post', 'Inward_masterController@editPost');
 Route::get('/change-status-inward_master/{id}', 'Inward_masterController@changeStatus');
 Route::get('/view-inward_master/{id}', 'Inward_masterController@view');
 Route::post('/', 'Inward_masterController@index');
-Route::get('/exportExcel','Inward_masterController@exportExcel');
+Route::get('/getInwardsByMaterialId/{id}', 'Inward_masterController@getInwardsByMaterialId');
 // Export to csv
+Route::get('/exportExcel','Inward_masterController@exportExcel');
 Route::get('/exportCSV','Inward_masterController@exportCSV');
+Route::get('/getDetails/{id}', 'Inward_masterController@getDetails');
 });
 // end of inward_master routes
 // routes for received_master.
@@ -253,5 +255,33 @@ Route::get('/exportCSV','StockController@exportCSV');
 Route::post('/', 'StockController@index');
 });
 // end of Stock routes
+// routes for engineer_master.
+Route::group(array('prefix' => 'engineer_master'), function()
+{
+Route::get('/', 'Engineer_masterController@index');
+Route::get('/add-engineer_master', 'Engineer_masterController@add');
+Route::post('/add-engineer_master-post', 'Engineer_masterController@addPost');
+Route::get('/delete-engineer_master/{id}', 'Engineer_masterController@delete');
+Route::get('/edit-engineer_master/{id}', 'Engineer_masterController@edit');
+Route::post('/edit-engineer_master-post', 'Engineer_masterController@editPost');
+Route::get('/change-status-engineer_master/{id}', 'Engineer_masterController@changeStatus');
+Route::get('/view-engineer_master/{id}', 'Engineer_masterController@view');
+});
+// end of engineer_master routes
+// routes for sms_view_subscribers.
+Route::group(array('prefix' => 'sms_view_subscribers'), function()
+{
+Route::get('/', 'Sms_view_subscribersController@index');
+Route::get('/details/{id}', 'Sms_view_subscribersController@details');
+Route::get('/add-sms_view_subscribers', 'Sms_view_subscribersController@add');
+Route::post('/add-sms_view_subscribers-post', 'Sms_view_subscribersController@addPost');
+Route::get('/delete-sms_view_subscribers/{id}', 'Sms_view_subscribersController@delete');
+Route::get('/edit-sms_view_subscribers/{id}', 'Sms_view_subscribersController@edit');
+Route::post('/edit-sms_view_subscribers-post', 'Sms_view_subscribersController@editPost');
+Route::get('/change-status-sms_view_subscribers/{id}', 'Sms_view_subscribersController@changeStatus');
+Route::get('/view-sms_view_subscribers/{id}', 'Sms_view_subscribersController@view');
+});
+// end of sms_view_subscribers routes
+
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home'); 

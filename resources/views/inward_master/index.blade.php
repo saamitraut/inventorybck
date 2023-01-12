@@ -15,11 +15,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Inward Entries</h4>
 
   
-@if(Session::has('message2'))
-  <div class="alert alert-success">
-                    <strong><span class="glyphicon glyphicon-ok"></span>{{  Session::get('message2') }}</strong>
-                </div>
-@endif
+@include('includes.message')
 
 <!-- Button trigger modal -->
 <button
@@ -47,7 +43,15 @@ Search
 <a class="btn btn-primary" style="margin-bottom: 15px" href="/inward_master/" role="button">CLEAR</a>
 <!-- CLEAR end -->
 
-
+@if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 <!-- Add Modal Starts-->
 <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -197,6 +201,15 @@ Search
                 </select>
               </div>
               <div class="mb-3">
+                <label for="defaultSelect" class="form-label">supplier </label>
+                <select id="defaultSelect" name="supplier" class="form-select" required>
+                  <option>Select supplier</option>                  
+                  @foreach($suppliers as $supplier)
+                    <option value="{{$supplier['id']}}">{{ $supplier['name'] }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="mb-3">
                  <label for="receiptno">ReceiptNo:</label>
                  <input type="text" value="" class="form-control" id="receiptno" name="receiptno">
               </div>
@@ -247,6 +260,7 @@ Search
 {{-- {{dd($inward_master->toArray())}} --}}
 <div class="card mb-4"><div class="row g-0"><div class="col-md-9">
                     <div class="card-body">
+                      <h5 class="card-title">Inward Id: INV{{sprintf('%06d', $inward_master->id)}}</h5>
                       <h5 class="card-title">{{$inward_master->material}}</h5>
                       <div class="card-subtitle text-muted mb-3">ReceiptNo: {{$inward_master->receiptno}}</div>
                       <p class="card-text">Supplier: {{$inward_master->supplier}}  
@@ -328,8 +342,18 @@ data-bs-target="#basicInvoice{{$i}}" class="card-img card-img-right" src="/uploa
     @foreach($materials as $material)
       <option {{$inward_master->material_id==$material['id']?'selected':''}} value="{{$material['id']}}">{{ $material['name'] }}</option>
     @endforeach
-  </select></div>
-    <div class="mb-3">
+  </select>
+ </div>
+   <div class="mb-3">
+                <label for="defaultSelect" class="form-label">supplier </label>
+                <select id="defaultSelect" name="supplier" class="form-select" required>
+                  <option>Select supplier</option>                  
+                  @foreach($suppliers as $supplier)
+                    <option {{$inward_master->supplier==$supplier['id']?'selected':''}} value="{{$supplier['id']}}">{{ $supplier['name'] }}</option>
+                  @endforeach
+                </select>
+              </div> 
+  <div class="mb-3">
     <label for="material_description">Material_description:</label>
     <input type="text" value="<?php echo $inward_master->material_description ?>" class="form-control" id="material_description" name="material_description">
   </div>

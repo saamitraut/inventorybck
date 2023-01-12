@@ -16,7 +16,7 @@ class Outward_master extends Eloquent  {
                     ->leftjoin('purpose_master', 'outward_master.purpose', '=', 'purpose_master.id');
         
         if($export){
-            $return=$return->select('material_master.name as material','outward_master.material_description','outward_master.issued','outward_master.issuedon','branch_master.name as branch','requiredfor_master.name as requiredfor','purpose_master.name as purpose');
+            $return=$return->select('material_master.name as material','outward_master.material_description','outward_master.issued','outward_master.issuedon','branch_master.name as branch','requiredfor_master.name as requiredfor','purpose_master.name as purpose','outward_master.amount');
         }else{
             $return=$return->select('outward_master.*','material_master.name as material','branch_master.name as branch','requiredfor_master.name as requiredfor','purpose_master.name as purpose');
         }        

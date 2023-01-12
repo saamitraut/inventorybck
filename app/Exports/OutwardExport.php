@@ -12,7 +12,7 @@ class OutwardExport implements FromCollection,WithHeadings
   }
   public function headings() : array
     {
-        return ['material','material_description','issued','issuedon','branch','requiredfor','purpose'];
+        return ['material','material_description','issued','issuedon','branch','requiredfor','purpose','amount'];
     }
 
     

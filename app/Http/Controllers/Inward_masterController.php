@@ -72,7 +72,8 @@ class Inward_masterController extends Controller {
         }
         // dd($inward_master_data);
         $inward_master_id = Inward_master::insert($inward_master_data);
-        session(['message' => 'Inward_master successfully added']);
+         $request->session()->flash('message.level', 'success');
+         $request->session()->flash('message.content', 'Inward_master successfully added');
         return Response::json(['message2'=>'Inward_master successfully added']);
         // return redirect('inward_master')->with('message', 'Inward_master successfully added');
     }
@@ -89,7 +90,7 @@ class Inward_masterController extends Controller {
         
         return view('inward_master/edit',$data);
     }
-    public function editPost()
+    public function editPost(Request $request)
     {   
         $id =Input::get('inward_master_id');
         $inward_master=Inward_master::find($id);
@@ -105,15 +106,26 @@ class Inward_masterController extends Controller {
         {
           $image_name=$inward_master->image;
         }                                                             
-        $inward_master_data = array(
-          'material_id' => Input::get('material_id'), 
-          'material_description' => Input::get('material_description'), 
-          'received' => Input::get('received'), 
-          'return' => Input::get('return'), 
-          'rate' => Input::get('rate'),  'receiptno' => Input::get('receiptno'), 
-          'amount' => Input::get('rate')*Input::get('received'), 
-          'image' => $image_name,
-        );
+        
+        $inward_master_data = $request->validate([
+          'material_id' => 'required',
+          'material_description' => 'required',
+          'supplier' => 'required',
+          'received' => 'required',
+          'return' => 'present',
+          'rate' => 'present',
+          // 'receivedon' => 'required',
+          'amount' => 'present',
+          // 'image' => 'present',
+          // 'receiptno' => 'required',
+          // 'opening_stock' => 'required',
+          // 'closing_stock' => 'required',
+          // 'reorder' => 'present',
+          // 'transportation' => 'required',
+        ]);
+        
+         $inward_master_data['image'] = $image_name;
+        
         $inward_master_id = Inward_master::where('id', '=', $id)->update($inward_master_data);
         return redirect('inward_master')->with('message', 'Inward_master Updated successfully');
     }
@@ -144,4 +156,14 @@ class Inward_masterController extends Controller {
       return Excel::download(new InwardExport, 'Inward.csv');
     }
 
+    public function getInwardsByMaterialId($material_id)
+    {   
+        $data['inwards']=Inward_master::where('material_id', '=', $material_id)->get()->toArray();
+        
+        return view('inward_master/dropdown',$data);
+    }
+    public function getDetails($id)
+    {   
+        return Inward_master::find($id);       
+    }
 }

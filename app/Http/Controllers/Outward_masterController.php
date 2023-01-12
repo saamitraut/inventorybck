@@ -6,7 +6,7 @@ use App\Models\Material_master as Material_master;
 use App\Models\Branch_master as Branch_master;
 use App\Models\Supplier as Supplier;
 use App\Models\Inward_master as Inward_master;
-use App\Models\Unit_master as Unit_master;
+use App\Models\Unit_master as Unit_master;  use App\Models\Engineer_master as Engineer_master;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Purpose_master as Purpose_master;
@@ -49,7 +49,19 @@ class Outward_masterController extends Controller {
         $data['materials'] = Material_master::list();
         
         $data['Branches'] = Branch_master::list2(); 
-        
+        $data['Engineers'] = Engineer_master::where('status',1)->get(); 
+
+        $data['responsible_persons']=[
+          1=>'Rajesh Nathani',
+          2=>'Pankaj Pise',
+          3=>'Sanjay mali',
+          4=>'santosh sawarde',
+          5=>'azhar mujawar',
+          6=>'Manoj Bhurat',
+          7=>'Madhav Betgeri',
+          8=>'Dhanesh Shete',
+          9=>'nurulamen bhokare'];
+        // dd($data);
         
         return view('outward_master/index',$data);
         
@@ -80,10 +92,15 @@ class Outward_masterController extends Controller {
              'customer_name' => Input::get('customer_name'),
              'mobile' => Input::get('mobile'),
              'area' => Input::get('area'),
-             'issued_to_staff' => Input::get('issued_to_staff'),
+             'issued_to_staff' => Engineer_master::where('accessid',explode("-",Input::get('issued_to_staff'))[0])->first()->id,
              'responsible_person' => Input::get('responsible_person'),
-             'receipt_no' => Input::get('receipt_no'),          
+             'receipt_no' => Input::get('receipt_no'), 
+             'inward_id' => Input::get('inward_id'.$i),
+             'rate' => Input::get('rate'.$i),
+             'amount' => Input::get('amount'.$i),
+             'customerid' => Input::get('customerid'),       
             );            
+            // dd($outward_master_data);
             $outward_master_id = Outward_master::insert($outward_master_data);
           }
 
