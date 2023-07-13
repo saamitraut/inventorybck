@@ -1,3 +1,7 @@
+<?php
+$role_id = Auth::user()->role_id;
+//print_r($role_id);exit;
+?>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="home" class="app-brand-link">
@@ -113,11 +117,17 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Pages</span>
             </li>
+		@if($role_id==1)
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">Masters</div></a>
               <ul class="menu-sub">
+				<li class="menu-item">
+                  <a href="\users" class="menu-link">
+                    <div data-i18n="User Master">User Master</div>
+                  </a>
+                </li>
                 <li class="menu-item">
                   <a href="\unit_master" class="menu-link">
                     <div data-i18n="Unit Master">Unit Master</div>
@@ -149,7 +159,14 @@
                 </li>
               </ul>
             </li>
-
+		@endif
+		@if($role_id==1 || $role_id==2 || $role_id==3 || $role_id==4 || $role_id==5 || $role_id==6)
+			<li class="menu-item">
+              <a href="\raise_requirement" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Raise Requirement</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="\Stock" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -168,6 +185,8 @@
                 <div data-i18n="Basic">Outward</div>
               </a>
             </li>
+		@endif
+		@if($role_id==1)
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -232,6 +251,7 @@
                 </li>
               </ul>
             </li>
+			@endif
             <!-- Components -->
             <div class="d-none"><li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
             <!-- Cards -->

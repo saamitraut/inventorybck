@@ -90,7 +90,7 @@ Search
               <div class="col-sm-6 mb-3">
                 <label for="defaultSelect" class="form-label">supplier </label>
                 <select id="defaultSelect" name="supplier" class="form-select" required>
-                  <option>Select supplier</option>                  
+                  <option value=''>Select supplier</option>                  
                   @foreach($suppliers as $supplier)
                     <option value="{{$supplier['id']}}">{{ $supplier['name'] }}</option>
                   @endforeach
@@ -99,60 +99,71 @@ Search
               </div>
                 <div class="row"><div class="col-sm-6 mb-3">
                 <label for="material_description">Material Description:</label>
-                <input type="text" class="form-control" id="material_description" name="material_description" required>
+				<!-- Required field validation changed -->
+                <!--<input type="text" class="form-control" id="material_description" name="material_description" required>-->
+				<input type="text" class="form-control" id="material_description" name="material_description">
+				<!-- Required field validation changed -->
+				
               </div><div class="col-sm-6 mb-3">
                 <label for="receiptno">ReceiptNo:</label>
                 <input type="text" value="" class="form-control" id="receiptno" name="receiptno" >
              </div>
               </div>
+			  
               <div class="row"><div class="col-sm-4 mb-3">
                 <label for="opening_stock">Opening_stock:</label>
                 <input type="text" class="form-control" id="opening_stock" name="opening_stock" readonly>
               </div>
-              <div class="col-sm-4 mb-3">
-                <label for="GST">GST:</label>
-                <input type="text" class="form-control" id="GST" name="GST" readonly>
-              </div>
-              <div class="col-sm-4 mb-3">
-                <label for="closing_stock">Closing_stock:</label>
-                <input type="text" class="form-control" id="closing_stock" name="closing_stock" readonly>
-              </div></div>
-                <div class="row"><div class="col-sm-4 mb-3">
+			  <div class="col-sm-4 mb-3">
                   <label for="received">Received:</label>
                   <input type="text" class="form-control" id="received" name="received" >
-                </div>
-                <div class="col-sm-4 mb-3">
+              </div>
+			  <div class="col-sm-4 mb-3">
                   <label for="return">Return:</label>
                   <input type="text" class="form-control" id="return" name="return">
+               </div></div>
+				
+              	  
+                <div class="row"><div class="col-sm-4 mb-3">
+                <label for="closing_stock">Closing_stock:</label>
+                <input type="text" class="form-control" id="closing_stock" name="closing_stock" readonly>
                 </div>
+                <div class="col-sm-4 mb-3">
+                <label for="rate">Rate:</label>
+                <input type="text" class="form-control" id="rate" name="rate">
+				</div>
+				<div class="col-sm-4 mb-3">
+                <label for="GST">GST:</label>
+                <input type="text" class="form-control" id="GST" name="GST" readonly>
+				</div>	</div>
+				
+				<div class="row">
+				<div class="col-sm-4 mb-3">
+                <label for="amount">Amount:</label>
+                <input type="text" value="" class="form-control" id="amount" name="amount">
+				</div>
+				<div class="col-sm-4 mb-3">
+                  <label for="amount">Paid:</label>
+                  <input type="text" value="" class="form-control" id="paid" name="paid">
+                </div>
+                <div class="col-sm-4 mb-3">
+                  <label for="amount">Pending:</label>
+                  <input type="text" value="" class="form-control" id="pending" name="pending">
+                </div>
+				</div>
+				
+				<div class="row">
                 <div class="col-sm-4 mb-3">
                   <label for="return">Reorder:</label>
                   <input type="text" class="form-control" id="reorder" name="reorder">
                 </div>
-            </div>
-              <div class="row"><div class="col-sm-4 mb-3">
-                <label for="rate">Rate:</label>
-                <input type="text" class="form-control" id="rate" name="rate">
-              </div><div class="col-sm-4 mb-3">
+				<div class="col-sm-4 mb-3">
                 <label for="transportation">Transportation:</label>
                 <input type="text" class="form-control" id="transportation" name="transportation">
-              </div>
-              <div class="col-sm-4 mb-3">
-                <label for="amount">Amount:</label>
-                <input type="text" value="" class="form-control" id="amount" name="amount">
-              </div>
-              </div>
-              <div class="row">                
-                <div class="col-sm-6 mb-3">
-                  <label for="amount">Paid:</label>
-                  <input type="text" value="" class="form-control" id="paid" name="paid">
-                </div>
-                <div class="col-sm-6 mb-3">
-                  <label for="amount">Pending:</label>
-                  <input type="text" value="" class="form-control" id="pending" name="pending">
-                </div>
-              </div>
-              <div class="row">
+				</div>
+				</div>
+
+               <div class="row">
                 <div class="col-sm-6 mb-3">
                   <label for="image" class="col-md-2 col-form-label">Image:</label>
                   <div class="col-md-10"><input type="file" class="btn btn-primary" id="image" name="image"></div>
@@ -168,7 +179,8 @@ Search
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="submit" class="btn btn-primary">Save changes</button> </form>
+        <!--<button type="submit" class="btn btn-primary">Save changes</button> </form>-->
+        <button type="submit" class="btn btn-primary">Add</button> </form>
       </div>
     </div>
   </div>
