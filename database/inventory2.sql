@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 01:04 PM
+-- Generation Time: Jul 13, 2023 at 01:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -20,22 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `inventory`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `material_master`
---
-
-CREATE TABLE `material_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `unit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `GST` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `material_master`
@@ -134,41 +118,6 @@ INSERT INTO `material_master` (`id`, `name`, `status`, `unit`, `created_at`, `up
 (91, 'Jenex AC 4 OUT NODE', '0', '', NULL, NULL, '0'),
 (93, 'Splicing machine repair', '0', '0', NULL, NULL, '0');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `outward_master`
---
-
-CREATE TABLE `outward_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `material_id` int(11) NOT NULL,
-  `material_description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `opening_stock` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `issued` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `closing_stock` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `unit_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `issuedon` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `branch_id` int(11) NOT NULL,
-  `required_for` int(11) NOT NULL,
-  `purpose` int(11) NOT NULL,
-  `aa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `customer_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `issued_to_staff` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `responsible_person` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `receipt_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `transportation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `inward_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customerid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `outward_master`
 --
@@ -186,20 +135,6 @@ INSERT INTO `outward_master` (`id`, `material_id`, `material_description`, `open
 (10, 1, 'some description', '1565', '100', '1465', NULL, '0', '2023-04-24 18:30:00', '2023-04-25 01:54:04', NULL, 2, 9, 6, 'check', 'Sangli Media Communication', '7722099919', 'SMC Control Room', '3', '2', '123456', '0', '10', '12', '1200', 'SMC0000001'),
 (11, 4, 'some description', '100', '10', '90', NULL, '0', '2023-04-27 07:40:27', '2023-04-27 02:10:27', NULL, 2, 1, 6, 'check', 'Sangli Media Communication', '7722099919', 'SMC Control Room', '17', '4', '1234567', '0', '11', '100', '1000', 'SMC0000001');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `purpose_master`
---
-
-CREATE TABLE `purpose_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `purpose_master`
 --
@@ -209,20 +144,6 @@ INSERT INTO `purpose_master` (`id`, `name`, `status`, `created_at`, `updated_at`
 (4, 'Transfer Connection', '0', NULL, NULL),
 (5, 'RC Connection', '0', NULL, '2022-12-30 23:00:43'),
 (6, 'Maintenance', '0', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `requiredfor_master`
---
-
-CREATE TABLE `requiredfor_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `requiredfor_master`
@@ -241,21 +162,6 @@ INSERT INTO `requiredfor_master` (`id`, `name`, `status`, `created_at`, `updated
 (10, 'Maha Nagar Palika Work', '0', NULL, NULL),
 (11, 'Trunk Line', '0', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `requirement`
---
-
-CREATE TABLE `requirement` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `material_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 0,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `requirement`
 --
@@ -269,39 +175,6 @@ INSERT INTO `requirement` (`id`, `material_id`, `quantity`, `status`, `created_a
 (7, '7', 256, '0', NULL, '2023-06-13 05:58:51'),
 (8, '2', 226, '0', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `return_master`
---
-
-CREATE TABLE `return_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `material_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `unit_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `return_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rate` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `roles`
 --
@@ -313,18 +186,6 @@ INSERT INTO `roles` (`id`, `name`, `description`, `created_at`, `updated_at`) VA
 (4, 'Main Stock Keeper User', 'A Main Stock Keeper User', '2023-02-23 04:10:39', '2023-02-23 04:10:39'),
 (5, 'Sub Stock Keeper User', 'A Sub Stock Keeper User', '2023-02-23 04:10:39', '2023-02-23 04:10:39');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `role_user`
---
-
-CREATE TABLE `role_user` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `role_user`
 --
@@ -335,24 +196,6 @@ INSERT INTO `role_user` (`id`, `role_id`, `user_id`) VALUES
 (3, 7, 3),
 (4, 8, 4),
 (5, 9, 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sms_view_subscribers`
---
-
-CREATE TABLE `sms_view_subscribers` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `customerid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `SubscriberName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `MobileNo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Area` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sms_view_subscribers`
@@ -371,19 +214,6 @@ INSERT INTO `sms_view_subscribers` (`id`, `customerid`, `SubscriberName`, `Mobil
 (10, 'SMC0000010', 'Mallinath Pavankumar Jamage', '9075767802', 'PPS Nagraj Datt Abhijit Inamdar', NULL, NULL, NULL, NULL),
 (11, 'SMC0000011', 'Sham Govindram Poptani', '9404287711', 'PPS Nagraj Datt Abhijit Inamdar', NULL, NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `status`
---
-
-CREATE TABLE `status` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `status`
 --
@@ -391,66 +221,6 @@ CREATE TABLE `status` (
 INSERT INTO `status` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'ACTIVE', NULL, NULL),
 (2, 'PENDING', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `stock`
--- (See below for the actual view)
---
-CREATE TABLE `stock` (
-`material_id` varchar(255)
-,`credit` varchar(255)
-,`debit` varchar(255)
-,`date` datetime
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `stockreport`
--- (See below for the actual view)
---
-CREATE TABLE `stockreport` (
-`material_id` varchar(255)
-,`credit` double
-,`debit` double
-,`availableStock` double
-);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stock_bck`
---
-
-CREATE TABLE `stock_bck` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `material_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `credit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `credited_on` timestamp NULL DEFAULT NULL,
-  `debit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `debited_on` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `supplier`
---
-
-CREATE TABLE `supplier` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `supplier`
@@ -461,20 +231,6 @@ INSERT INTO `supplier` (`id`, `name`, `number`, `address`, `status`, `created_at
 (5, 'Shree Vision', NULL, 'Madhav Nagar Sangli', '0', NULL, NULL),
 (6, 'SP electronics', NULL, 'Kolhapur', '0', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `unit_master`
---
-
-CREATE TABLE `unit_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Dumping data for table `unit_master`
 --
@@ -483,48 +239,6 @@ INSERT INTO `unit_master` (`id`, `name`, `status`, `created_at`, `updated_at`) V
 (1, 'MTR', '0', NULL, '2023-04-26 02:05:29'),
 (2, 'Nos', '1', NULL, '2022-09-18 06:40:21'),
 (4, 'Tunitterm', '0', NULL, '2023-04-25 01:05:38');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `usage_master`
---
-
-CREATE TABLE `usage_master` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `material_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_of_units` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `branch_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Requiredfor_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Purpose_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `customer_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `engineer_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `responsible_person_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Receiptno` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `amount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `role_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -570,196 +284,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `stockreport`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `stockreport`  AS SELECT `stock`.`material_id` AS `material_id`, sum(`stock`.`credit`) AS `credit`, sum(`stock`.`debit`) AS `debit`, sum(`stock`.`credit`) - sum(`stock`.`debit`) AS `availableStock` FROM `stock` GROUP BY `stock`.`material_id` ORDER BY `stock`.`date` ASC  ;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `material_master`
---
-ALTER TABLE `material_master`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `material_master_name_unique` (`name`);
-
---
--- Indexes for table `outward_master`
---
-ALTER TABLE `outward_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `purpose_master`
---
-ALTER TABLE `purpose_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `requiredfor_master`
---
-ALTER TABLE `requiredfor_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `requirement`
---
-ALTER TABLE `requirement`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `return_master`
---
-ALTER TABLE `return_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `role_user`
---
-ALTER TABLE `role_user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sms_view_subscribers`
---
-ALTER TABLE `sms_view_subscribers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `stock_bck`
---
-ALTER TABLE `stock_bck`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `supplier`
---
-ALTER TABLE `supplier`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `unit_master`
---
-ALTER TABLE `unit_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `usage_master`
---
-ALTER TABLE `usage_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `material_master`
---
-ALTER TABLE `material_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
-
---
--- AUTO_INCREMENT for table `outward_master`
---
-ALTER TABLE `outward_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `purpose_master`
---
-ALTER TABLE `purpose_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `requiredfor_master`
---
-ALTER TABLE `requiredfor_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `requirement`
---
-ALTER TABLE `requirement`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `return_master`
---
-ALTER TABLE `return_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `role_user`
---
-ALTER TABLE `role_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `sms_view_subscribers`
---
-ALTER TABLE `sms_view_subscribers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `status`
---
-ALTER TABLE `status`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `stock_bck`
---
-ALTER TABLE `stock_bck`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `supplier`
---
-ALTER TABLE `supplier`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `unit_master`
---
-ALTER TABLE `unit_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `usage_master`
---
-ALTER TABLE `usage_master`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
