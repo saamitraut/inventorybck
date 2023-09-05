@@ -3,6 +3,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// routes for users.
+Route::group(array('prefix' => 'users'), function()
+{
+Route::get('/', 'UsersController@index');
+Route::get('/add-users', 'UsersController@add');
+Route::post('/add-users-post', 'UsersController@addPost');
+Route::get('/delete-users/{id}', 'UsersController@delete');
+Route::get('/edit-users/{id}', 'UsersController@edit');
+Route::post('/edit-users-post', 'UsersController@editPost');
+Route::get('/change-status-users/{id}', 'UsersController@changeStatus');
+Route::get('/view-users/{id}', 'UsersController@view');
+Route::get('/exportExcel','UsersController@exportExcel');
+Route::post('/', 'UsersController@index');
+});
+// end of users routes
+
+
 // routes for unit_master.
 Route::group(array('prefix' => 'unit_master'), function()
 {
@@ -137,6 +155,7 @@ Route::get('/change-status-return_master/{id}', 'Return_masterController@changeS
 Route::get('/view-return_master/{id}', 'Return_masterController@view');
 });
 // end of return_master routes
+
 // routes for outward_master.
 Route::group(array('prefix' => 'outward_master'), function()
 {
@@ -156,6 +175,24 @@ Route::get('/exportCSV','Outward_masterController@exportCSV');
 });
 
 // end of outward_master routes
+
+// routes for requirement.
+Route::group(array('prefix' => 'raise_requirement'), function()
+{
+Route::get('/', 'RequirementController@index');
+// Route::get('/add-outward_master', 'RequirementController@add');
+Route::post('/add-requirement-post', 'RequirementController@addPost');
+Route::get('/delete-requirement/{id}', 'RequirementController@delete');
+Route::get('/edit-requirement/{id}', 'RequirementController@edit');
+Route::post('/edit-requirement-post', 'RequirementController@editPost');
+Route::get('/change-status-requirement/{id}', 'RequirementController@changeStatus');
+Route::get('/view-requirement/{id}', 'RequirementController@view');
+
+});
+
+// end of requirement routes
+
+
 // routes for issued_master.
 Route::group(array('prefix' => 'issued_master'), function()
 {

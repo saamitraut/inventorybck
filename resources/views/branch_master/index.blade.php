@@ -109,19 +109,6 @@ Search
 </div>
 <!-- Modal end -->
 @if(count($branch_masters)>0)
-{{-- <div class="card"> --}}
-  {{-- <h5 class="card-header">Manage Branch Master</h5> --}}
-  {{-- <div class=" text-nowrap"> --}}
-  {{-- <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>SL No</th>
-        <th>name</th>
-        <th>Status</th>
-       <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody> --}}
     <?php $i=1 ?>
 @foreach($branch_masters as $branch_master)
 <div class="card mb-4">
@@ -154,7 +141,6 @@ Search
                 <label for="name">Name:</label>
                 <input type="text" value="<?php echo $branch_master->name ?>" class="form-control" id="name" name="name">
             </div>
-              
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -166,34 +152,8 @@ Search
   </div>
 </div>
 <!-- Modal edit ends -->
-      {{-- <tr>
-        <td>{{$i+$branch_masters->perPage()*($branch_masters->currentPage()-1)}} </td>
-        <td> <a href="{{Request::root()}}/branch_master/view-branch_master/{{$branch_master->id}}" > {{$branch_master->name }}</a> </td>
-        <td><span class="badge bg-label-{{$branch_master->status?'primary':'warning' }} me-1">{{$branch_master->status?'Active':'Pending' }}</span></td>  
-        <td>
-          <div class="dropdown">
-            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-              <i class="bx bx-dots-vertical-rounded"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="{{Request::root()}}/branch_master/change-status-branch_master/{{$branch_master->id }}"
-                ><i class="bx bx-windows me-1"></i> @if($branch_master->status==0) {{"Activate"}}  @else {{"Dectivate"}} @endif</a
-              >
-              <a class="dropdown-item" href="{{Request::root()}}/branch_master/edit-branch_master/{{$branch_master->id}}"
-                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-              >
-              <a class="dropdown-item" href="{{Request::root()}}/branch_master/delete-branch_master/{{$branch_master->id}}" onclick="return confirm('are you sure to delete')"
-                ><i class="bx bx-trash me-1"></i> Delete</a
-              >
-            </div>
-          </div>
-        </td>
-
-      </tr> --}}
-    <?php $i++;  ?>
+      <?php $i++;  ?>
     @endforeach
-    {{-- </tbody>
-  </table> --}}
    @else
   <div class="alert alert-info" role="alert">
                     <strong>No Branch_masters Found!</strong>
@@ -202,10 +162,7 @@ Search
  @if(Request::isMethod('GET'))
     {{ $branch_masters->render() }} 
     @endif
-{{-- </div> --}}
-{{-- </div> --}}
 </div>
 </div>
 <!-- Content end -->
-
 @include('includes.footer')

@@ -14,11 +14,17 @@ use Hash;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\OutwardExport;
+use Illuminate\Support\Facades\Auth;
 
 class Outward_masterController extends Controller {
 
     public function index()
       { 
+		//	Change done for branch user login 27th April 2023 below
+		$login_data=Auth::user();
+		// echo $login_data->branch_id;exit;
+		//	Change done for branch user login 27th April 2023 above
+			
         // $data['outward_masters'] = Outward_master::paginate(5);      
         $material_id=false; $issuedon=false; $branch_id=false; $required_for=false; $purpose=false;
 
@@ -39,7 +45,13 @@ class Outward_masterController extends Controller {
         if (request()->has('purpose') and (request()->input('purpose') != "Select purpose")) {
           $purpose=request()->input('purpose');
         }
-
+		
+		//	Change done for branch user login 27th April 2023 below
+		if($login_data->branch_id){
+			$branch_id=$login_data->branch_id;
+		}
+		//	Change done for branch user login 27th April 2023 above
+		
         $data['outward_masters'] = Outward_master::list(false,$material_id,$issuedon,$branch_id,$required_for,$purpose);
         
         $data['required_fors'] = Requiredfor_master::list2(); 

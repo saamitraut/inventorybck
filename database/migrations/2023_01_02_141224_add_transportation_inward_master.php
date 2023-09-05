@@ -15,7 +15,7 @@ class AddTransportationInwardMaster extends Migration
     {
         Schema::table("inward_master", function (Blueprint $table)
         {
-            $table->string("transportation");
+            $table->string("transportation")->default(0)->change();
         });
     }
 

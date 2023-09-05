@@ -48,7 +48,7 @@ class Inward_masterController extends Controller {
       {
         $inward_master_data = $request->validate([
           'material_id' => 'required',
-          'material_description' => 'required',
+          //'material_description' => 'required',
           'supplier' => 'required',
           'received' => 'required',
           'return' => 'present',
@@ -59,9 +59,9 @@ class Inward_masterController extends Controller {
           'receiptno' => 'required|unique:inward_master,receiptno',
           'opening_stock' => 'required',
           'closing_stock' => 'required',
+		  //'transportation' => 'required',
           'reorder' => 'present',
-          'transportation' => 'required',
-        ]);
+         ]);
         
         if (Input::hasFile('image')) {
             $destinationPath = 'uploads'; 
