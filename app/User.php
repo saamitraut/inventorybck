@@ -44,7 +44,7 @@ class User extends Authenticatable
 			$return=self::select('name','email');
 		}
 		else{
-			$return=self::select('id','name','email','status','branch_id','branch_id');
+			$return=self::select('id','name','email','status','branch_id','branch_id')->selectRaw('ROW_NUMBER() OVER (ORDER BY id) as srno');
 		}
 		if($name){
             $return=$return->where('name', '=', $name);
@@ -56,7 +56,7 @@ class User extends Authenticatable
 			$return=$return->get();
 		}
 		else{
-			$return=$return->get();
+			$return=$return->paginate(5);
 		}
 		return $return;
 	}
