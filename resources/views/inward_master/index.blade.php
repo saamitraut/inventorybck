@@ -97,7 +97,7 @@ Search
                 </select>
               </div>
               </div>
-                <div class="row"><div class="col-sm-6 mb-3">
+                <div class="row d-none"><div class="col-sm-6 mb-3">
                 <label for="material_description">Material Description:</label>
 				<!-- Required field validation changed -->
                 <!--<input type="text" class="form-control" id="material_description" name="material_description" required>-->
@@ -142,22 +142,22 @@ Search
                 <label for="amount">Amount:</label>
                 <input type="text" value="" class="form-control" id="amount" name="amount">
 				</div>
-				<div class="col-sm-4 mb-3">
+				<div class="col-sm-4 mb-3 d-none">
                   <label for="amount">Paid:</label>
                   <input type="text" value="" class="form-control" id="paid" name="paid">
                 </div>
-                <div class="col-sm-4 mb-3">
+                <div class="col-sm-4 mb-3 d-none">
                   <label for="amount">Pending:</label>
                   <input type="text" value="" class="form-control" id="pending" name="pending">
                 </div>
 				</div>
 				
 				<div class="row">
-                <div class="col-sm-4 mb-3">
+                <div class="col-sm-4 mb-3 d-none">
                   <label for="return">Reorder:</label>
                   <input type="text" class="form-control" id="reorder" name="reorder">
                 </div>
-				<div class="col-sm-4 mb-3">
+				<div class="col-sm-4 mb-3 d-none">
                 <label for="transportation">Transportation:</label>
                 <input type="text" class="form-control" id="transportation" name="transportation">
 				</div>
